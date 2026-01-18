@@ -29,6 +29,8 @@ dist-ssr
 
 # Project
 /vault
+/platform/nginx-php-8.5/docker/config/nginx/conf.d/
+!/platform/nginx-php-8.5/docker/config/nginx/conf.d/.gitkeep
 /platform/nginx-php*/docker/config/supervisor/conf.d
 !/platform/nginx-php*/docker/config/supervisor/conf.d/.gitkeep
 /resources/database/*

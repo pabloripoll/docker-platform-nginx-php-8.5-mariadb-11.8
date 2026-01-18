@@ -21,7 +21,7 @@ endif
 
 include ../../.env
 
-DOCKER_PLTF="NGINX - PHP 8.5 FPM"
+DOCKER_PLTF="NGINX - PHP 8.5"
 DOCKER_LEAD=$(PROJECT_LEAD)
 DOCKER_CNET=$(PROJECT_CNET)
 DOCKER_HOST=$(PROJECT_HOST)
@@ -168,14 +168,12 @@ nginx-conf: ## shows nginx configuration set on the running container
 
 nginx-update: ## updates nginx configuration without the need of stoping or rebuilding the container
 	$(DOCKER) cp ./docker/config/nginx/nginx.conf $(DOCKER_CONTAINER):/etc/nginx/conf.d/default.conf
-	$(MAKE) restart
 
 nginx-default-conf: ## shows nginx default server block set on the running container
 	$(DOCKER) exec -i $(DOCKER_CONTAINER) sh -c 'cat /etc/nginx/conf.d/default.conf'
 
 nginx-default-update: ## updates nginx default server block without the need of stoping or rebuilding the container
 	$(DOCKER) cp ./docker/config/nginx/conf.d/default.conf $(DOCKER_CONTAINER):/etc/nginx/conf.d/default.conf
-	$(MAKE) restart
 
 # -------------------------------------------------------------------------------------------------
 #  PHP settings management
@@ -188,11 +186,9 @@ php-conf: ## shows php configuration set on the running container
 
 php-conf-update: ## updates php configuration without the need of stoping or rebuilding the container
 	$(DOCKER) cp ./docker/config/php/php.ini $(DOCKER_CONTAINER):/etc/php83/conf.d/custom.ini
-	$(MAKE) restart
 
 php-fpm-conf: ## shows PHP-FPM configuration set on the running container
 	$(DOCKER) exec -i $(DOCKER_CONTAINER) sh -c 'cat /etc/php83/php-fpm.d/www.conf'
 
 php-fpm-update: ## updates PHP-FPM configuration without the need of stoping or rebuilding the container
 	$(DOCKER) cp ./docker/config/php/fpm-pool.conf $(DOCKER_CONTAINER):/etc/php83/php-fpm.d/www.conf
-	$(MAKE) restart
